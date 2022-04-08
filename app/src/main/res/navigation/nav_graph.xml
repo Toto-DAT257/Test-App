@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/registration">
+
+    <fragment
+        android:id="@+id/loggedIn"
+        android:name="com.example.email_test.loggedIn"
+        android:label="fragment_logged_in"
+        tools:layout="@layout/fragment_logged_in" >
+        <action
+            android:id="@+id/action_loggedIn_to_startFragment"
+            app:destination="@id/startFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/registration"
+        android:name="com.example.email_test.Registration"
+        android:label="fragment_registration"
+        tools:layout="@layout/fragment_registration" >
+        <action
+            android:id="@+id/action_registration_to_startFragment"
+            app:destination="@id/startFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/startFragment"
+        android:name="com.example.email_test.StartFragment"
+        android:label="fragment_start"
+        tools:layout="@layout/fragment_start" >
+        <action
+            android:id="@+id/action_startFragment_to_registration2"
+            app:destination="@id/registration" />
+        <action
+            android:id="@+id/action_startFragment_to_blankFragment"
+            app:destination="@id/blankFragment" />
+        <action
+            android:id="@+id/action_startFragment_to_loggedIn"
+            app:destination="@id/loggedIn" />
+    </fragment>
+    <fragment
+        android:id="@+id/blankFragment"
+        android:name="com.example.email_test.BlankFragment"
+        android:label="fragment_blank"
+        tools:layout="@layout/fragment_blank" >
+        <action
+            android:id="@+id/action_blankFragment_to_startFragment"
+            app:destination="@id/startFragment" />
+    </fragment>
+</navigation>
