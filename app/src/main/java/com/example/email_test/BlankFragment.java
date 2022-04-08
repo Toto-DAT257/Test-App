@@ -56,12 +56,13 @@ public class BlankFragment extends Fragment {
                 Navigation.findNavController(view).navigate(R.id.action_blankFragment_to_startFragment);
             }
         });
-        //String API =   "http://api.touch-and-tell.se/checkin/624b4f6fa23e9500043e154b";
+        // "http://api.touch-and-tell.se/checkin/624b4f6fa23e9500043e154b"; link for getting data from API
+        // "http://collect.touch-and-tell.se/v2.35.7/generic.html?device=624b4f6fa23e9500043e154b&redirect=true"; survey link in database
 
 
         SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPref.edit();
-        String user = sharedPref.getString("username", null);
+        String user = sharedPref.getString("username", null); // get username
 
         String dbURL = "https://email-test-35515-default-rtdb.europe-west1.firebasedatabase.app/";
         FirebaseDatabase database = FirebaseDatabase.getInstance(dbURL);
@@ -73,12 +74,14 @@ public class BlankFragment extends Fragment {
 
                 String URL = dataSnapshot.getValue(String.class);
 
-                StringBuilder sb = new StringBuilder();
+                StringBuilder sb = new StringBuilder(); // build api link from survey link
                 sb.append("https://api.touch-and-tell.se/checkin/");
                 String id = URL.substring(61, 85);
                 sb.append(id);
                 String API = sb.toString();
 
+
+                // fetch JSON from API
                 RequestQueue requestQueue = Volley.newRequestQueue(getActivity());
 
                 JsonObjectRequest objectRequest = new JsonObjectRequest(
@@ -91,6 +94,7 @@ public class BlankFragment extends Fragment {
                                 Log.e("Rest Response", response.toString());
                                 json = response.toString();
 
+                                // Turn string into another json object and query that to get question text and type
                                 JsonObject convertedObject = new Gson().fromJson(json, JsonObject.class);
                                 JsonArray questions = convertedObject.getAsJsonArray("questions");
                                 JsonObject q1 = questions.get(0).getAsJsonObject();

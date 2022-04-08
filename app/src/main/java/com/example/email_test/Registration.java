@@ -47,6 +47,7 @@ public class Registration extends Fragment {
 
         String stored = sharedPref.getString("username", "no username");
 
+        // if already logged in go to start screen
         if (!stored.equals("no username")) {
             Navigation.findNavController(getActivity(), R.id.fragmentContainerView).navigate(R.id.action_registration_to_startFragment);
         }
@@ -70,7 +71,6 @@ public class Registration extends Fragment {
                         Log.e(TAG,"Exist");
                         //String value = dataSnapshot.getValue(String.class);
                         //Log.e(TAG, "Value is: " + value);
-
 
                         editor.putString("username", input);
                         editor.apply();
